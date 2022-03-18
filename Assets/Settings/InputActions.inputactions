@@ -2,22 +2,13 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "Model",
+            "name": "Shape",
             "id": "24583255-df13-489a-b312-fce6f0edae39",
             "actions": [
                 {
-                    "name": "Create",
+                    "name": "Select",
                     "type": "Button",
                     "id": "56abaf36-32f5-4de0-9f6b-d6c318f9398b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Delete",
-                    "type": "Button",
-                    "id": "0ade981a-98f0-4b62-ad40-d4ae17719f3e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -29,21 +20,10 @@
                     "name": "",
                     "id": "02269d7c-de21-4fa1-a65f-ca100d574493",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Create",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c4241b45-48d3-41e3-b0d5-1c65b6094478",
-                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Delete",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

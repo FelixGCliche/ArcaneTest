@@ -24,29 +24,17 @@ public class ShapeButton : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
   public void OnBeginDrag(PointerEventData eventData)
   {
-    Debug.Log("Begin drag" + eventData);
   }
 
   public void OnDrag(PointerEventData eventData)
   {
-    Debug.Log("Dragging" + eventData);
-  }
-
-  private Vector3 GetWorldPosition(Vector3 pointerPosition)
-  {
-    var mainCamera = Camera.main;
-    pointerPosition.z = 5.0f;
-    var worldPoint = mainCamera!.ScreenToWorldPoint(pointerPosition);
-    Debug.Log(worldPoint);
-
-    return worldPoint;
   }
 
   public void OnEndDrag(PointerEventData eventData)
   {
     shapeFactory.CreateShapeByType(
       shapeType,
-      GetWorldPosition(eventData.position)
+      PointerUtils.GetWorldPosition(eventData.position)
     );
   }
 }
