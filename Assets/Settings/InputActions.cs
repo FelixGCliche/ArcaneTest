@@ -24,22 +24,13 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     ""name"": ""InputActions"",
     ""maps"": [
         {
-            ""name"": ""Model"",
+            ""name"": ""Shape"",
             ""id"": ""24583255-df13-489a-b312-fce6f0edae39"",
             ""actions"": [
                 {
-                    ""name"": ""Create"",
+                    ""name"": ""Select"",
                     ""type"": ""Button"",
                     ""id"": ""56abaf36-32f5-4de0-9f6b-d6c318f9398b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Delete"",
-                    ""type"": ""Button"",
-                    ""id"": ""0ade981a-98f0-4b62-ad40-d4ae17719f3e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -51,21 +42,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""02269d7c-de21-4fa1-a65f-ca100d574493"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Create"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c4241b45-48d3-41e3-b0d5-1c65b6094478"",
-                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Delete"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -74,10 +54,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Model
-        m_Model = asset.FindActionMap("Model", throwIfNotFound: true);
-        m_Model_Create = m_Model.FindAction("Create", throwIfNotFound: true);
-        m_Model_Delete = m_Model.FindAction("Delete", throwIfNotFound: true);
+        // Shape
+        m_Shape = asset.FindActionMap("Shape", throwIfNotFound: true);
+        m_Shape_Select = m_Shape.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -134,49 +113,40 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Model
-    private readonly InputActionMap m_Model;
-    private IModelActions m_ModelActionsCallbackInterface;
-    private readonly InputAction m_Model_Create;
-    private readonly InputAction m_Model_Delete;
-    public struct ModelActions
+    // Shape
+    private readonly InputActionMap m_Shape;
+    private IShapeActions m_ShapeActionsCallbackInterface;
+    private readonly InputAction m_Shape_Select;
+    public struct ShapeActions
     {
         private @InputActions m_Wrapper;
-        public ModelActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Create => m_Wrapper.m_Model_Create;
-        public InputAction @Delete => m_Wrapper.m_Model_Delete;
-        public InputActionMap Get() { return m_Wrapper.m_Model; }
+        public ShapeActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Select => m_Wrapper.m_Shape_Select;
+        public InputActionMap Get() { return m_Wrapper.m_Shape; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ModelActions set) { return set.Get(); }
-        public void SetCallbacks(IModelActions instance)
+        public static implicit operator InputActionMap(ShapeActions set) { return set.Get(); }
+        public void SetCallbacks(IShapeActions instance)
         {
-            if (m_Wrapper.m_ModelActionsCallbackInterface != null)
+            if (m_Wrapper.m_ShapeActionsCallbackInterface != null)
             {
-                @Create.started -= m_Wrapper.m_ModelActionsCallbackInterface.OnCreate;
-                @Create.performed -= m_Wrapper.m_ModelActionsCallbackInterface.OnCreate;
-                @Create.canceled -= m_Wrapper.m_ModelActionsCallbackInterface.OnCreate;
-                @Delete.started -= m_Wrapper.m_ModelActionsCallbackInterface.OnDelete;
-                @Delete.performed -= m_Wrapper.m_ModelActionsCallbackInterface.OnDelete;
-                @Delete.canceled -= m_Wrapper.m_ModelActionsCallbackInterface.OnDelete;
+                @Select.started -= m_Wrapper.m_ShapeActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_ShapeActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_ShapeActionsCallbackInterface.OnSelect;
             }
-            m_Wrapper.m_ModelActionsCallbackInterface = instance;
+            m_Wrapper.m_ShapeActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Create.started += instance.OnCreate;
-                @Create.performed += instance.OnCreate;
-                @Create.canceled += instance.OnCreate;
-                @Delete.started += instance.OnDelete;
-                @Delete.performed += instance.OnDelete;
-                @Delete.canceled += instance.OnDelete;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
             }
         }
     }
-    public ModelActions @Model => new ModelActions(this);
-    public interface IModelActions
+    public ShapeActions @Shape => new ShapeActions(this);
+    public interface IShapeActions
     {
-        void OnCreate(InputAction.CallbackContext context);
-        void OnDelete(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }
